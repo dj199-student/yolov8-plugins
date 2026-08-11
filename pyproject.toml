@@ -1,6 +1,6 @@
 [build-system]
 requires = ["setuptools>=68.0", "wheel"]
-build-backend = "setuptools.backends._legacy:_Backend"
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "yolov8-plugins"
@@ -36,7 +36,28 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Image Recognition",
 ]
 
+# Core dependencies (minimal set for basic usage)
+dependencies = [
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+    "ultralytics>=8.0.0",
+    "pyyaml>=6.0",
+    "opencv-python>=4.8.0",
+    "pillow>=9.0.0",
+    "numpy>=1.24.0",
+]
+
 [project.optional-dependencies]
+# Full installation: pip install "yolov8-plugins[full]"
+full = [
+    "pandas>=2.0.0",
+    "matplotlib>=3.7.0",
+    "seaborn>=0.12.0",
+    "tensorboard>=2.13.0",
+    "onnx>=1.14.0",
+    "onnxruntime>=1.15.0",
+    "onnxslim>=0.1.0",
+]
 gui = [
     "matplotlib>=3.7.0",
 ]
@@ -50,6 +71,19 @@ dev = [
     "jupyter",
     "pytest>=7.0",
 ]
+
+[project.scripts]
+yolo-train = "scripts.train:main"
+yolo-detect = "scripts.detect:main"
+yolo-val = "scripts.val:main"
+yolo-export = "scripts.export:main"
+yolo-benchmark = "scripts.benchmark:main"
+
+[project.urls]
+Homepage = "https://github.com/dj199-student/yolov8-plugins"
+Repository = "https://github.com/dj199-student/yolov8-plugins.git"
+Issues = "https://github.com/dj199-student/yolov8-plugins/issues"
+Changelog = "https://github.com/dj199-student/yolov8-plugins/blob/main/CHANGELOG.md"
 
 [tool.setuptools]
 packages = ["models", "utils", "scripts"]

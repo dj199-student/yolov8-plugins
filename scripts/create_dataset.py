@@ -2,7 +2,7 @@
 import cv2, os, yaml, random, numpy as np
 from pathlib import Path
 
-BASE = Path(r"C:\Users\Admin\Desktop\yolo v8\datasets\custom_test")
+BASE = Path(__file__).resolve().parent.parent / "datasets" / "custom_test"
 for d in [BASE / "images/train", BASE / "images/val",
           BASE / "labels/train", BASE / "labels/val"]:
     d.mkdir(parents=True, exist_ok=True)

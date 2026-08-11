@@ -29,4 +29,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Configuration persistence** for GUI user preferences.
 - **Model export** support: ONNX, TensorRT, TFLite, OpenVINO, CoreML, NCNN.
 
-[1.0.0]: https://github.com/username/yolov8-plugins/releases/tag/v1.0.0
+[1.0.0]: https://github.com/dj199-student/yolov8-plugins/releases/tag/v1.0.0
