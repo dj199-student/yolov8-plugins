@@ -5,6 +5,7 @@
 """
 
 import threading
+import sys
 import time
 from pathlib import Path
 from typing import Any, Callable
@@ -13,6 +14,11 @@ from collections import deque
 import cv2
 import numpy as np
 from ultralytics import YOLO
+
+# Ensure project root is importable
+_PROJECT_ROOT = str(Path(__file__).resolve().parent.parent.parent.parent)
+if _PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, _PROJECT_ROOT)
 
 from utils.plots import draw_detections
 

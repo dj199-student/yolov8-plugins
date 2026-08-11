@@ -19,7 +19,9 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+_PROJECT_ROOT = str(Path(__file__).resolve().parent.parent.parent)
+if _PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, _PROJECT_ROOT)
 
 from .tabs.detect_tab import DetectTab
 from .tabs.train_tab import TrainTab
