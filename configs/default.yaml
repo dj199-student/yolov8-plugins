@@ -1,0 +1,102 @@
+# ============================
+# YOLOv8 默认训练配置
+# ============================
+
+# ---- 模型配置 ----
+model:
+  # 基础模型: yolov8n / yolov8s / yolov8m / yolov8l / yolov8x
+  # 也支持: yolov8n-seg (分割) / yolov8n-pose (姿态估计)
+  base: yolov8n.pt
+
+  # 插件配置（参见 configs/plugins/ 下的示例）
+  plugins:
+    # Backbone 插件：注意力机制、改进卷积、Transformer
+    backbone: []
+    # 示例：
+    #   - type: se_attention
+    #     params: {reduction: 16}
+    #   - type: p_conv
+    #     params: {ratio: 0.25}
+
+    # Neck 插件：改进 FPN/PAN 结构
+    neck: []
+    # 示例：
+    #   - type: bifpn
+    #     params: {in_channels_list: [256, 512, 1024], num_layers: 3}
+
+    # Head 插件：改进检测头
+    head: []
+    # 示例：
+    #   - type: dy_head
+    #     params: {in_channels_list: [256, 512, 1024]}
+
+# ---- 训练配置 ----
+train:
+  data: coco128.yaml        # 数据集配置
+  epochs: 100               # 训练轮数
+  imgsz: 640               # 输入图像尺寸
+  batch: 16                # 批量大小
+  device: ""               # 设备 (空=自动, 0=GPU0, cpu=CPU)
+  workers: 8               # 数据加载线程数
+  optimizer: auto          # 优化器: auto / SGD / Adam / AdamW
+  lr0: 0.01               # 初始学习率
+  lrf: 0.01               # 最终学习率因子 (lr0 * lrf)
+  momentum: 0.937          # SGD 动量
+  weight_decay: 0.0005     # 权重衰减
+  warmup_epochs: 3.0       # 预热轮数
+  warmup_momentum: 0.8     # 预热初始动量
+  warmup_bias_lr: 0.1      # 预热偏置学习率
+  cos_lr: true             # 余弦退火调度
+  close_mosaic: 10         # 最后 N 轮关闭 Mosaic 增强
+  amp: true                # 自动混合精度
+  resume: false            # 是否断点续训
+  pretrained: true         # 是否使用预训练权重
+
+# ---- 数据增强配置 ----
+augment:
+  hsv_h: 0.015            # HSV-Hue 增强
+  hsv_s: 0.7              # HSV-Saturation 增强
+  hsv_v: 0.4              # HSV-Value 增强
+  degrees: 0.0            # 随机旋转 (±degrees)
+  translate: 0.1          # 随机平移 (±translate)
+  scale: 0.5              # 随机缩放 (±scale)
+  shear: 0.0              # 随机剪切 (±shear)
+  perspective: 0.0        # 随机透视
+  flipud: 0.0             # 上下翻转概率
+  fliplr: 0.5             # 左右翻转概率
+  mosaic: 1.0             # Mosaic 增强概率
+  mixup: 0.0              # MixUp 增强概率
+  copy_paste: 0.0         # Copy-Paste 增强概率
+
+# ---- 验证配置 ----
+val:
+  data: coco128.yaml
+  imgsz: 640
+  batch: 16
+  device: ""
+  workers: 8
+  conf: 0.001             # NMS 置信度阈值
+  iou: 0.6                # NMS IoU 阈值
+  max_det: 300            # 每张图最大检测数
+  half: true              # FP16 推理
+  plots: true             # 绘制 PR 曲线等
+  save_json: false        # 保存 COCO JSON 格式
+
+# ---- 导出配置 ----
+export:
+  format: onnx            # 导出格式
+  imgsz: 640
+  half: false             # FP16
+  int8: false             # INT8 量化
+  dynamic: false          # 动态尺寸
+  simplify: true          # ONNX 简化
+  opset: 12               # ONNX opset
+  workspace: 4            # TensorRT 工作区 (GB)
+
+# ---- 日志配置 ----
+log:
+  project: yolov8_plugins
+  name: exp
+  exist_ok: false
+  save_dir: runs
+  tensorboard: true

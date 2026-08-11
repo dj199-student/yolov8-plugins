@@ -1,0 +1,32 @@
+# ============================
+# 自定义数据集配置模板
+# ============================
+# 目录结构:
+#   dataset/
+#   ├── images/
+#   │   ├── train/
+#   │   └── val/
+#   ├── labels/
+#   │   ├── train/
+#   │   └── val/
+#   └── custom.yaml   ← 这个文件
+
+# 数据集根目录
+path: ./dataset
+
+# 训练/验证图像目录
+train: images/train
+val: images/val
+test:  # 可选
+
+# 类别数量和名称
+nc: 2
+names:
+  0: cat
+  1: dog
+
+# 提示：
+# 1. 标注格式为 YOLO txt 格式（每行: class_id x_center y_center width height）
+#    所有坐标归一化到 [0, 1]
+# 2. 如果需要转换 VOC/COCO 格式，使用 utils/dataset.py 中的工具函数
+# 3. 训练: python scripts/train.py --data configs/datasets/custom.yaml

@@ -1,0 +1,18 @@
+# COCO128 本地测试数据集
+#
+# 原 coco128 无法下载（无网络），使用本地 custom_test 替代
+# 50 张图片：40 train + 10 val，5 个类别
+#
+# 路径相对于此 YAML 文件
+
+path: .
+train: ../../datasets/custom_test/images/train
+val: ../../datasets/custom_test/images/val
+
+nc: 5
+names:
+  0: person
+  1: car
+  2: dog
+  3: cat
+  4: bottle

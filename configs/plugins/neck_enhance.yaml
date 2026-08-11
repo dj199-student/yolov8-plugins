@@ -1,0 +1,60 @@
+# ============================
+# Neck 增强 + SPP 改进配置示例
+# ============================
+
+model:
+  base: yolov8n.pt
+  plugins:
+    backbone:
+      # Backbone 中可以添加 SPP 改进
+      # SPPCSPC：CSP 连接的 SPP
+      # - type: sppcspc
+      #   params:
+      #     in_channels: 512
+      #     out_channels: 512
+
+      # SPPFCSPC：CSP 连接的快速 SPP（推荐）
+      # - type: sppfcspc
+      #   params:
+      #     in_channels: 512
+      #     out_channels: 512
+
+      # ASPP：空洞空间金字塔池化
+      # - type: aspp
+      #   params:
+      #     in_channels: 512
+      #     out_channels: 256
+
+    neck:
+      # ---- 特征金字塔改进 ----
+      # BiFPN：加权特征金字塔（EfficientDet 同款）
+      # - type: bifpn
+      #   params:
+      #     in_channels_list: [256, 512, 1024]
+      #     out_channels: 256
+      #     num_layers: 3
+
+      # ASFF：自适应空间特征融合
+      # - type: asff
+      #   params:
+      #     in_channels_list: [256, 512, 1024]
+
+      # SDLI：尺度解耦层交互
+      # - type: sdli
+      #   params:
+      #     in_channels_list: [256, 512, 1024]
+      #     out_channels: 256
+
+      # Gather-Distribute (Gold-YOLO)：信息收集+分发
+      - type: gather_distribute
+        params:
+          in_channels_list: [256, 512, 1024]
+          out_channels: 256
+
+    head:
+      # ---- 检测头改进 ----
+      # DyHead：动态检测头（统一尺度/空间/任务感知）
+      # - type: dy_head
+      #   params:
+      #     in_channels_list: [256, 512, 1024]
+      #     num_blocks: 6

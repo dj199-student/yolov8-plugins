@@ -1,0 +1,65 @@
+# ============================
+# 注意力机制插件配置示例
+# ============================
+
+model:
+  base: yolov8n.pt
+  plugins:
+    backbone:
+      # ---- 通道注意力 ----
+      # SE (Squeeze-and-Excitation)：通道维度的全局注意力
+      # - type: se_attention
+      #   params:
+      #     reduction: 16    # 压缩比，越小注意力越强但参数越多
+      #     in_channels: 256  # 输入通道数
+
+      # ECA (Efficient Channel Attention)：无需降维的轻量通道注意力
+      - type: eca
+        params:
+          in_channels: 256
+
+      # ---- 空间+通道注意力 ----
+      # CBAM：通道+空间注意力，经典组合
+      # - type: cbam
+      #   params:
+      #     in_channels: 256
+      #     reduction: 16
+      #     kernel_size: 7
+
+      # CA (Coordinate Attention)：坐标注意力，对位置敏感
+      # - type: ca
+      #   params:
+      #     in_channels: 256
+      #     reduction: 32
+
+      # ---- 高级注意力 ----
+      # GAM (Global Attention Mechanism)：全局注意力
+      # - type: gam
+      #   params:
+      #     in_channels: 256
+      #     reduction: 16
+
+      # SimAM：无参数注意力（基于神经科学能量函数）
+      # - type: simam
+      #   params:
+      #     lambda_val: 0.0001
+
+      # Shuffle Attention：分组通道注意力+通道混洗
+      # - type: shuffle_attention
+      #   params:
+      #     in_channels: 256
+      #     groups: 8
+
+      # Triplet Attention：三向交叉维度注意力
+      # - type: triplet_attention
+      #   params:
+      #     in_channels: 256
+
+      # Dual Attention (DANet)：位置+通道双注意力
+      # - type: dual_attention
+      #   params:
+      #     in_channels: 256
+      #     reduction: 16
+
+    neck: []
+    head: []

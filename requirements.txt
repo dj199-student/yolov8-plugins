@@ -1,0 +1,35 @@
+# YOLOv8 完整项目依赖
+# 核心框架
+torch>=2.0.0
+torchvision>=0.15.0
+ultralytics>=8.0.0
+
+# 配置管理
+pyyaml>=6.0
+
+# 图像处理
+opencv-python>=4.8.0
+pillow>=9.0.0
+
+# 数据科学
+numpy>=1.24.0
+pandas>=2.0.0
+
+# 可视化
+matplotlib>=3.7.0
+seaborn>=0.12.0
+tensorboard>=2.13.0
+
+# 模型导出
+onnx>=1.14.0
+onnxruntime>=1.15.0
+onnxslim>=0.1.0
+
+# 实验追踪（可选）
+# wandb
+# clearml
+# mlflow
+
+# 开发工具（可选）
+# ipykernel
+# jupyter
